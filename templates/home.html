@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+
+{% block title %}Inicio - Mi Proyecto{% endblock %}
+
+{% block content %}
+  <h1>Bienvenido a Mi Proyecto</h1>
+  {% if user %}
+    <p>Hola, {{ user }}. Ya estás conectado.</p>
+    <p>Visita tu <a href="{{ url_for('profile') }}">perfil</a> o <a href="{{ url_for('logout') }}">cerrar sesión</a>.</p>
+  {% else %}
+    <p>Por favor, <a href="{{ url_for('login') }}">inicia sesión</a> o <a href="{{ url_for('register') }}">regístrate</a> para continuar.</p>
+  {% endif %}
+{% endblock %}

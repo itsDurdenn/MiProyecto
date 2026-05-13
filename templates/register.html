@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+
+{% block title %}Registro - Mi Proyecto{% endblock %}
+
+{% block content %}
+  <h1>Registro</h1>
+  <form method="post" action="{{ url_for('register') }}">
+    <label for="name">Nombre completo</label>
+    <input type="text" id="name" name="name" value="{{ request.form.get('name', '') }}" required>
+
+    <label for="email">Correo electrónico</label>
+    <input type="email" id="email" name="email" value="{{ request.form.get('email', '') }}" required>
+
+    <label for="password">Contraseña</label>
+    <input type="password" id="password" name="password" required>
+
+    <label for="confirm">Confirmar contraseña</label>
+    <input type="password" id="confirm" name="confirm" required>
+
+    <button type="submit">Crear cuenta</button>
+  </form>
+{% endblock %}

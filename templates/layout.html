@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Mi Proyecto{% endblock %}</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="{{ url_for('home') }}">Inicio</a>
+        {% if session.get('user') %}
+          <a href="{{ url_for('profile') }}">Perfil</a>
+          <a href="{{ url_for('logout') }}">Cerrar sesión</a>
+        {% else %}
+          <a href="{{ url_for('login') }}">Iniciar sesión</a>
+          <a href="{{ url_for('register') }}">Registrarse</a>
+        {% endif %}
+      </nav>
+    </header>
+    <div class="container">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="message {{ category }}">{{ message }}</div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+      {% block content %}{% endblock %}
+    </div>
+    <div class="footer">MiProyecto - Autenticación con Flask y MongoDB</div>
+  </body>
+</html>
