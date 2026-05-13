@@ -23,7 +23,7 @@ def verify_password(stored_password: str, provided_password: str) -> bool:
 
 @app.route("/")
 def home():
-    return render_template("home.html", user=session.get("user"))
+    return render_template("inicio.html", user=session.get("user"))
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -48,7 +48,7 @@ def register():
             flash("Registro exitoso. Ya estás conectado.", "success")
             return redirect(url_for("profile"))
 
-    return render_template("register.html")
+    return render_template("registro.html")
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -66,7 +66,7 @@ def login():
 
         flash("Correo o contraseña incorrectos.", "error")
 
-    return render_template("login.html")
+    return render_template("acceso.html")
 
 
 @app.route("/profile")
@@ -75,7 +75,7 @@ def profile():
         flash("Debes iniciar sesión para ver tu perfil.", "error")
         return redirect(url_for("login"))
 
-    return render_template("profile.html", user=session["user"], email=session.get("email"))
+    return render_template("perfil.html", user=session["user"], email=session.get("email"))
 
 
 @app.route("/logout")
