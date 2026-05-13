@@ -1,11 +1,10 @@
-{% extends 'diseño.html' %}
+{% extends 'inicio.html' %}
 
-{% block title %}Perfil - Mi Proyecto{% endblock %}
+{% block titulo %}Mi perfil{% endblock titulo %}
 
-{% block content %}
-  <h1>Mi perfil</h1>
+{% block contenido %}
   <p>Bienvenido, {{ user }}.</p>
   <p>Correo: {{ email }}</p>
   <p>Gracias por usar el sistema de autenticación.</p>
   <p><a href="{{ url_for('logout') }}">Cerrar sesión</a></p>
-{% endblock %}
+{% endblock contenido %}

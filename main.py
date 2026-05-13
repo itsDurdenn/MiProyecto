@@ -26,7 +26,7 @@ def home():
     return render_template("inicio.html", user=session.get("user"))
 
 
-@app.route("/register", methods=["GET", "POST"])
+@app.route("/registro", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
         name = request.form.get("name", "").strip()
@@ -51,7 +51,7 @@ def register():
     return render_template("registro.html")
 
 
-@app.route("/login", methods=["GET", "POST"])
+@app.route("/sesion", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
         email = request.form.get("email", "").strip().lower()
@@ -69,7 +69,7 @@ def login():
     return render_template("acceso.html")
 
 
-@app.route("/profile")
+@app.route("/perfil")
 def profile():
     if not session.get("user"):
         flash("Debes iniciar sesión para ver tu perfil.", "error")
