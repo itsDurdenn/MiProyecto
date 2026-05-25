@@ -1,6 +1,7 @@
 import os
 
 from flask import Flask, flash, redirect, render_template, request, session, url_for
+import requests
 from pymongo import MongoClient
 
 app = Flask(__name__)
@@ -23,7 +24,18 @@ def verify_password(stored_password: str, provided_password: str) -> bool:
 
 @app.route("/")
 def home():
-    return render_template("inicio.html", user=session.get("user"))
+    url = "https://api.jikan.moe/v4/manga?q=berserk&order_by=score&sort=desc"
+    try:
+        response = requests.get(url, timeout=10)
+        response.raise_for_status()
+        data = response.json()
+        mangas = data.get("data", [])
+        # Filtrar solo los que tienen exactamente 'Berserk' en el título
+        mangas = [m for m in mangas if m.get("title", "").lower() == "berserk"]
+    except Exception as e:
+        mangas = []
+        flash(f"No se pudieron obtener los mangas: {e}", "error")
+    return render_template("inicio.html", user=session.get("user"), mangas=mangas)
 
 
 @app.route("/registro", methods=["GET", "POST"])
@@ -84,6 +96,19 @@ def logout():
     flash("Has cerrado sesión correctamente.", "success")
     return redirect(url_for("home"))
 
+@app.route("/mangas")
+def mangas():
+    url = "https://api.jikan.moe/v4/manga?q=berserk&order_by=score&sort=desc"
+    try:
+        response = requests.get(url, timeout=10)
+        response.raise_for_status()
+        data = response.json()
+        mangas = data.get("data", [])
+        mangas = [m for m in mangas if m.get("title", "").lower() == "berserk"]
+    except Exception as e:
+        mangas = []
+        flash(f"No se pudieron obtener los mangas: {e}", "error")
+    return render_template("mangas.html", mangas=mangas, user=session.get("user"))
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)

@@ -48,13 +48,29 @@
     </nav>
 
     <div class="bg-success">
-        <h1 class="text-center">{% block titulo %}Bienvenido a Mi Proyecto{% endblock titulo %}</h1>
+        <h1 class="text-center">{% block titulo %}{% endblock titulo %}</h1>
     </div>
 
-    <section>
-        {% block contenido %}
-        {% endblock %}
-    </section>
+
+        <section>
+                {% block contenido %}{% endblock %}
+
+                <h2 class="text-center mt-4">Mangas de Berserk</h2>
+                <div style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: flex-start;">
+                    {% for manga in mangas %}
+                        <div style="border: 1px solid #ccc; border-radius: 8px; width: 220px; padding: 1rem; background: #fff;">
+                            {% if manga.images and manga.images.jpg and manga.images.jpg.image_url %}
+                                <img src="{{ manga.images.jpg.image_url }}" alt="{{ manga.title }}" style="width: 200px; height: 300px; object-fit: cover; border-radius: 4px;">
+                            {% endif %}
+                            <h3>{{ manga.title }}</h3>
+                            <p>{{ manga.synopsis|default('Sin descripción') }}</p>
+                            <p><b>Capítulos:</b> {{ manga.chapters or 'N/A' }}</p>
+                            <p><b>Volúmenes:</b> {{ manga.volumes or 'N/A' }}</p>
+                            <a href="https://myanimelist.net/manga/{{ manga.mal_id }}" target="_blank">Ver en MyAnimeList</a>
+                        </div>
+                    {% endfor %}
+                </div>
+        </section>
 
     <hr class="divider bg-dark">
 
