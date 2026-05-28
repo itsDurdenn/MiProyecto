@@ -3,6 +3,7 @@
 - No.Control: 24308060610640
 - Correo electronico:24308060610640@cetis61.edu.mx
 - Fecha: 13 de Mayo
+- Mi foto: !
 # MiProyecto
 
 Aplicación básica de Flask con registro e inicio de sesión conectada a MongoDB.
