@@ -11,5 +11,4 @@ Aplicación básica de Flask con registro e inicio de sesión conectada a MongoD
 
 - Registro de usuario con correo y contraseña
 - Inicio de sesión con sesión Flask
-- Almacenamiento de usuarios en MongoDB
-- Contraseña cifrada con PBKDF2-HMAC-SHA256
+- Almacenamiento de usuarios en MongoD
